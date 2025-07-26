@@ -2,7 +2,7 @@ import React from "react";
 
 function AboutMe() {
   return (
-    <section className="py-20 px-4 text-center max-w-4xl mx-auto">
+    <section id="about" className="py-20 px-4 text-center max-w-4xl mx-auto">
       <h2 className="text-4xl font-semibold text-pink-600 mb-6">About Me</h2>
       <p className="text-lg text-gray-700">
         I'm currently a second-year Computer Science undergraduate at the
