@@ -4,37 +4,38 @@ const Header = () => {
   return (
     <section
       id="header"
-      className="h-screen w-full text-[#faf5f8] flex items-center px-6 md:px-16 lg:px-24"
+      className="w-full text-[#faf5f8] pt-32 pb-20 px-6 md:px-16 lg:px-24 min-h-screen flex items-center relative z-10"
     >
-      <div className="flex flex-col-reverse md:flex-row items-center justify-between w-full gap-10 relative z-10">
-        {/* Left content */}
-        <div className="md:w-1/2 animate-fade-in-left">
-          <div className="bg-[#5e2e48]/40 backdrop-blur-md p-8 rounded-xl shadow-2xl">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 leading-tight text-[#bc749f]">
-              Hi, I’m Tharushi 👩‍💻
-            </h1>
-            <p className="text-lg md:text-xl text-[#f5e9ef] mb-6 max-w-xl">
-              A passionate Computer Science undergraduate from the University of
-              Westminster seeking an internship opportunity to apply and grow my
-              skills.
-            </p>
-            <a
-              href="#contact"
-              className="inline-block bg-[#a45383] hover:bg-[#bc749f] text-white px-6 py-3 rounded-full shadow-lg transition duration-300"
-            >
-              Let’s Connect
-            </a>
-          </div>
-        </div>
-
-        {/* Right image section */}
-        <div className="md:w-1/2 flex justify-center animate-fade-in-right">
-          <div className="relative w-72 h-72 rounded-full overflow-hidden border-4 border-[#bc749f] shadow-xl">
+      <div className="flex flex-col md:flex-row items-center justify-between w-full gap-12 relative z-10">
+        {/* Left image section */}
+        <div className="md:w-1/2 flex justify-center animate-fade-in-left">
+          <div className="relative w-96 h-96 rounded-full overflow-hidden border-8 border-[#bc749f] shadow-2xl">
             <img
               src="/pic2.jpg"
               alt="Tharushi"
-              className="object-cover w-full h-full hover:scale-105 transition duration-500"
+              className="object-cover w-full h-full hover:scale-110 transition duration-700"
             />
+          </div>
+        </div>
+
+        {/* Right content */}
+        <div className="md:w-1/2 animate-fade-in-right flex flex-col justify-center space-y-4">
+          <h2 className="text-3xl md:text-4xl font-medium text-[#bc749f]">
+            Hi,
+          </h2>
+          <h1 className="text-5xl md:text-6xl font-extrabold leading-tight text-[#faf5f8]">
+            I'm Tharushi Cooray
+          </h1>
+          <p className="text-lg md:text-xl text-[#f5e9ef] max-w-xl">
+            A passionate Computer Science undergraduate
+          </p>
+          <div className="flex justify-center md:justify-start mt-6">
+            <a
+              href="#contact"
+              className="bg-[#a45383] hover:bg-[#bc749f] text-white px-8 py-4 rounded-full shadow-lg font-semibold text-lg transition duration-300"
+            >
+              Let's Connect
+            </a>
           </div>
         </div>
       </div>
