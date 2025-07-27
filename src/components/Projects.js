@@ -17,30 +17,39 @@ const projects = [
 
 function Projects() {
   return (
-    <section id="projects" className="py-20 px-4 text-center">
-      <h2 className="text-4xl font-semibold text-pink-600 mb-10">Projects</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-        {projects.map((proj, idx) => (
-          <div
-            key={idx}
-            className="border border-pink-200 p-6 rounded-xl bg-white shadow-sm hover:shadow-lg transition"
-          >
-            <h3 className="text-xl font-bold text-pink-700 mb-2">
-              {proj.title}
-            </h3>
-            <p className="text-gray-700 mb-3">{proj.description}</p>
-            <div className="flex flex-wrap justify-center gap-2">
-              {proj.tech.map((t) => (
-                <span
-                  key={t}
-                  className="text-sm bg-pink-100 px-3 py-1 rounded-full text-pink-600"
-                >
-                  {t}
-                </span>
-              ))}
+    <section
+      id="projects"
+      className="py-24 px-6 bg-gradient-to-b from-white via-pink-50 to-white"
+    >
+      <div className="max-w-6xl mx-auto">
+        <h2 className="text-4xl md:text-5xl font-extrabold text-center text-pink-600 mb-16">
+          My Projects
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          {projects.map((proj, idx) => (
+            <div
+              key={idx}
+              className="bg-white rounded-2xl border border-pink-100 shadow-md hover:shadow-xl transition duration-300 p-6 text-left"
+            >
+              <h3 className="text-2xl font-bold text-pink-700 mb-4">
+                {proj.title}
+              </h3>
+              <p className="text-gray-600 mb-4 leading-relaxed">
+                {proj.description}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {proj.tech.map((tech) => (
+                  <span
+                    key={tech}
+                    className="bg-pink-100 text-pink-700 text-xs font-medium px-3 py-1 rounded-full shadow-sm"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );

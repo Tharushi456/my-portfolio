@@ -14,19 +14,24 @@ const skills = [
 
 function Skills() {
   return (
-    <section id="skills" className="py-20 px-4 bg-pink-100">
-      <h2 className="text-4xl font-semibold text-center text-pink-600 mb-10">
-        Skills
-      </h2>
-      <div className="flex flex-wrap justify-center gap-4 max-w-3xl mx-auto">
-        {skills.map((skill) => (
-          <span
-            key={skill}
-            className="px-4 py-2 bg-white border border-pink-300 rounded-full text-pink-700 text-sm font-medium shadow-sm"
-          >
-            {skill}
-          </span>
-        ))}
+    <section
+      id="skills"
+      className="py-20 px-6 md:px-16 lg:px-24 bg-gradient-to-br from-[#faf5f8] via-[#f0d5e6] to-[#fbe1f0] text-[#2d0f1d]"
+    >
+      <div className="max-w-5xl mx-auto text-center animate-fade-in-up">
+        <h2 className="text-4xl md:text-5xl font-semibold text-[#a45383] mb-10 tracking-tight">
+          My <span className="text-[#703455]">Skills</span>
+        </h2>
+        <div className="flex flex-wrap justify-center gap-4">
+          {skills.map((skill) => (
+            <span
+              key={skill}
+              className="px-6 py-3 bg-white/80 border border-[#e0b9c9] rounded-full text-[#703455] text-sm md:text-base font-semibold shadow-md hover:bg-white hover:scale-105 transition-transform duration-300"
+            >
+              {skill}
+            </span>
+          ))}
+        </div>
       </div>
     </section>
   );

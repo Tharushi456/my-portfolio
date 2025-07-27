@@ -32,6 +32,10 @@ module.exports = {
           "0%, 100%": { transform: "translateY(0px)" },
           "50%": { transform: "translateY(-20px)" },
         },
+        fadeInUp: {
+          "0%": { opacity: 0, transform: "translateY(20px)" },
+          "100%": { opacity: 1, transform: "translateY(0)" },
+        },
         spinSlow: {
           "0%": { transform: "rotate(0deg)" },
           "100%": { transform: "rotate(360deg)" },
@@ -42,6 +46,7 @@ module.exports = {
         "spin-slow": "spinSlow 30s linear infinite",
         "fade-in-left": "fadeInLeft 0.8s ease-out both",
         "fade-in-right": "fadeInRight 0.8s ease-out both",
+        "fade-in-up": "fadeInUp 1s ease-out forwards",
       },
     },
   },
