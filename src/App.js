@@ -2,33 +2,49 @@ import React from "react";
 import Navbar from "./components/Navbar";
 import Header from "./components/Header";
 import AboutMe from "./components/AboutMe";
-import Skills from "./components/Skills";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 
 function App() {
   return (
-    <main className="relative font-sans bg-gradient-to-br from-[#050205] via-[#3a1d2a] to-[#501f3a] text-[#faf5f8] overflow-x-hidden scroll-smooth">
-      {/* Decorative Animated Background Shapes */}
-      <div className="absolute top-0 left-0 w-80 h-80 bg-[#7a4c6d] opacity-15 rounded-full blur-3xl animate-pulse z-0" />
-      <div className="absolute bottom-20 right-0 w-96 h-96 bg-[#6b3a57] opacity-8 rounded-full blur-2xl animate-spin-slow z-0" />
-      <div className="absolute top-1/3 left-1/2 w-72 h-72 bg-[#a67b92] opacity-8 rounded-full blur-2xl animate-float z-0" />
+    <main className="relative font-sans bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 text-white overflow-x-hidden scroll-smooth">
+      {/* Enhanced Decorative Animated Background Shapes */}
+      <div className="absolute top-20 left-10 w-72 h-72 bg-purple-700 rounded-full mix-blend-multiply filter blur-xl opacity-15 animate-pulse z-0" />
+      <div
+        className="absolute top-40 right-10 w-96 h-96 bg-pink-700 rounded-full mix-blend-multiply filter blur-xl opacity-15 animate-pulse z-0"
+        style={{ animationDelay: "1000ms" }}
+      />
+      <div
+        className="absolute bottom-32 left-1/3 w-80 h-80 bg-blue-700 rounded-full mix-blend-multiply filter blur-xl opacity-15 animate-pulse z-0"
+        style={{ animationDelay: "2000ms" }}
+      />
+      <div
+        className="absolute top-1/2 right-1/4 w-64 h-64 bg-indigo-700 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse z-0"
+        style={{ animationDelay: "3000ms" }}
+      />
+      <div
+        className="absolute bottom-1/4 left-10 w-56 h-56 bg-violet-700 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse z-0"
+        style={{ animationDelay: "4000ms" }}
+      />
+      {/* Floating gradient orbs */}
+
+      <div
+        className="absolute bottom-1/3 right-1/3 w-24 h-24 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full opacity-8 animate-float z-0"
+        style={{ animationDelay: "2000ms" }}
+      />
 
       {/* Main Content */}
       <div className="relative z-10">
         <Navbar />
         <Header />
-        <section id="about" className="px-6 md:px-16 lg:px-24">
+        <section id="about">
           <AboutMe />
         </section>
-        <section id="skills" className="px-6 md:px-16 lg:px-24">
-          <Skills />
-        </section>
-        <section id="projects" className="px-6 md:px-16 lg:px-24">
+        <section id="projects">
           <Projects />
         </section>
-        <section id="contact" className="px-6 md:px-16 lg:px-24">
+        <section id="contact">
           <Contact />
         </section>
         <Footer />
