@@ -14,16 +14,13 @@ const AboutMe = () => {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  const skills = [
-    "Python",
-    "Java",
-    "JavaScript",
-    "Node.js",
-    "MongoDB",
-    "SQL",
-    "PHP",
-    "Linux",
-  ];
+  const skillCategories = {
+    "Frontend & UI Technologies": ["HTML", "CSS", "React"],
+    "Programming Languages": ["Python", "Java", "JavaScript", "PHP"],
+    "Backend & Runtime": ["Node.js"],
+    Databases: ["MongoDB", "SQL"],
+    "Tools & OS": ["Linux"],
+  };
 
   const educationData = [
     {
@@ -44,22 +41,36 @@ const AboutMe = () => {
 
   const certifications = [
     {
-      name: "Full Stack Web Development Bootcamp",
-      provider: "Codecademy",
-      year: "2024",
-      color: "from-purple-700 to-pink-700",
+      name: "SQL (Intermediate)",
+      provider: "HackerRank",
+      year: "Jul 2025",
+      credentialId: "A34B1E16A841",
+      pdf: "/certificates/sql-intermediate.png",
+      color: "from-purple-700 to-indigo-700",
     },
     {
-      name: "Java Programming Certification",
-      provider: "Coursera",
-      year: "2023",
-      color: "from-blue-700 to-cyan-700",
+      name: "Spring Boot 2.0 Essential Training",
+      provider: "LinkedIn Learning",
+      year: "Nov 2024",
+      credentialId: null,
+      pdf: "/certificates/spring-boot-training.png",
+      color: "from-pink-700 to-rose-700",
     },
     {
-      name: "Linux Essentials",
-      provider: "Linux Foundation",
-      year: "2022",
-      color: "from-green-700 to-teal-700",
+      name: "Python (Basic)",
+      provider: "HackerRank",
+      year: "Sep 2024",
+      credentialId: "3E846A5F166D",
+      pdf: "/certificates/python-basic.png",
+      color: "from-yellow-700 to-orange-700",
+    },
+    {
+      name: "Python for Beginners",
+      provider: "University of Moratuwa",
+      year: "Jun 2023",
+      credentialId: "QEPmsAu9KC",
+      pdf: "/certificates/python-for-beginners.pdf",
+      color: "from-blue-800 to-teal-800",
     },
   ];
 
@@ -81,7 +92,7 @@ const AboutMe = () => {
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Navigation Tabs */}
-        <div className="flex justify-center mb-16">
+        <div className="flex justify-center mb-16 mt-8">
           <div className="bg-black/50 backdrop-blur-lg rounded-full p-2 border border-white/5">
             {["about", "education", "skills", "certifications"].map(
               (section) => (
@@ -111,7 +122,7 @@ const AboutMe = () => {
             }`}
           >
             <div className="text-center mb-16">
-              <h1 className="text-6xl md:text-8xl font-black bg-gradient-to-r from-purple-300 via-pink-300 to-purple-500 bg-clip-text text-transparent mb-6 leading-tight">
+              <h1 className="text-5xl font-bold text-center bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent mb-16 mt-8">
                 About Me
               </h1>
               <div className="w-32 h-1 bg-gradient-to-r from-purple-600 to-pink-600 mx-auto rounded-full"></div>
@@ -127,7 +138,7 @@ const AboutMe = () => {
                     Current Status
                   </h3>
                   <p className="text-gray-300 leading-relaxed">
-                    Second-year{" "}
+                    Third-year{" "}
                     <span className="font-semibold text-purple-300">
                       Computer Science undergraduate
                     </span>{" "}
@@ -155,11 +166,16 @@ const AboutMe = () => {
             <div className="mt-16 text-center">
               <div className="bg-black/50 backdrop-blur-xl p-8 rounded-3xl border border-white/5 max-w-4xl mx-auto">
                 <p className="text-xl text-gray-300 leading-relaxed">
-                  I love collaborating in diverse teams and continuously
-                  learning new skills to keep pace with the fast-changing tech
-                  world. I'm seeking a dynamic internship where I can grow my
-                  skills and contribute to impactful projects that make a
-                  difference.
+                  I am a dedicated software developer with a strong vision to
+                  deliver impactful and user-centric digital solutions. I
+                  combine a keen eye for design with a focus on reliable
+                  functionality to create applications that meet real-world
+                  needs. Driven by a passion for clean, maintainable code and
+                  continuous learning, I stay committed to adapting and growing
+                  in a rapidly evolving technological landscape. My goal is to
+                  translate innovative ideas into efficient, high-quality
+                  software that enhances user experience and drives meaningful
+                  outcomes.
                 </p>
               </div>
             </div>
@@ -168,26 +184,29 @@ const AboutMe = () => {
 
         {/* Skills Section */}
         {activeSection === "skills" && (
-          <div className="transform transition-all duration-700 translate-y-0 opacity-100">
-            <h2 className="text-5xl font-bold text-center bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent mb-16">
+          <div>
+            <h2 className="text-5xl font-bold text-center bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent mb-16 mt-8">
               Technical Skills
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-              {skills.map((skill, index) => (
-                <div
-                  key={skill}
-                  className="group relative bg-gradient-to-br from-purple-950/40 to-pink-950/40 backdrop-blur-xl p-6 rounded-2xl border border-white/5 hover:border-purple-600/30 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-700/15"
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
-                  <div className="text-center">
-                    <div className="w-12 h-12 bg-gradient-to-r from-purple-700 to-pink-700 rounded-full mx-auto mb-3 flex items-center justify-center text-white font-bold">
-                      {skill.charAt(0)}
-                    </div>
-                    <h3 className="text-white font-semibold group-hover:text-purple-300 transition-colors">
-                      {skill}
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              {Object.entries(skillCategories).map(([category, skills]) => (
+                <div key={category}>
+                  <div className="bg-gradient-to-br from-purple-950/60 to-pink-950/60 backdrop-blur-xl p-6 rounded-2xl border border-white/5 hover:scale-105 transition-transform duration-300">
+                    <h3 className="text-xl font-semibold mb-4 text-purple-300 text-center">
+                      {category}
                     </h3>
+                    <div className="flex flex-wrap justify-center gap-3">
+                      {skills.map((skill) => (
+                        <span
+                          key={skill}
+                          className="px-4 py-2 bg-slate-800/50 text-purple-300 text-sm font-semibold rounded-xl border border-slate-600 hover:border-purple-500 hover:bg-purple-900/30 transition-all duration-300 transform hover:scale-105"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-800/0 via-purple-800/5 to-pink-800/0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
               ))}
             </div>
@@ -197,7 +216,7 @@ const AboutMe = () => {
         {/* Education Section */}
         {activeSection === "education" && (
           <div className="transform transition-all duration-700 translate-y-0 opacity-100">
-            <h2 className="text-5xl font-bold text-center bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent mb-16">
+            <h2 className="text-5xl font-bold text-center bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent mb-16 mt-8">
               Education Journey
             </h2>
             <div className="relative max-w-4xl mx-auto">
@@ -247,32 +266,30 @@ const AboutMe = () => {
         {/* Certifications Section */}
         {activeSection === "certifications" && (
           <div className="transform transition-all duration-700 translate-y-0 opacity-100">
-            <h2 className="text-5xl font-bold text-center bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent mb-16">
+            <h2 className="text-5xl font-bold text-center bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent mb-16 mt-8">
               Certifications
             </h2>
             <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
               {certifications.map((cert, index) => (
                 <div
                   key={index}
-                  className="group relative bg-black/60 backdrop-blur-xl p-6 rounded-2xl border border-white/5 hover:border-white/20 transition-all duration-300 hover:scale-105"
-                  style={{ animationDelay: `${index * 200}ms` }}
+                  className="bg-gradient-to-br from-purple-950/60 to-pink-950/60 backdrop-blur-xl p-6 rounded-2xl border border-white/5 hover:scale-105 transition-transform duration-300"
                 >
-                  <div
-                    className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${cert.color} rounded-t-2xl`}
-                  ></div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div
-                      className={`w-3 h-3 rounded-full bg-gradient-to-r ${cert.color}`}
-                    ></div>
-                    <span className="text-gray-400 text-sm font-mono">
-                      {cert.year}
-                    </span>
-                  </div>
-                  <h4 className="text-lg font-bold text-white mb-2 group-hover:text-purple-300 transition-colors">
+                  <h3 className="text-lg font-semibold text-purple-300 mb-2">
                     {cert.name}
-                  </h4>
-                  <p className="text-gray-400 text-sm">{cert.provider}</p>
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/3 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </h3>
+                  <p className="text-slate-200 text-sm mb-2">{cert.provider}</p>
+                  <p className="text-slate-300 text-xs mb-4">{cert.year}</p>
+                  {cert.pdf && (
+                    <a
+                      href={cert.pdf}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block px-4 py-2 bg-purple-600 text-white rounded-full text-sm hover:bg-purple-700 transition"
+                    >
+                      View Certificate
+                    </a>
+                  )}
                 </div>
               ))}
             </div>
