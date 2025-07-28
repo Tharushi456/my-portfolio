@@ -68,21 +68,16 @@ const AboutMe = () => {
       id="about"
       className="min-h-screen py-20 px-4 md:px-8 lg:px-16 relative overflow-hidden"
     >
-      {/* Mouse Follower Effect */}
+      {/* Background animated orbs */}
+      <div className="absolute top-40 left-20 w-60 h-60 bg-purple-700 rounded-full mix-blend-multiply filter blur-2xl opacity-10 animate-pulse" />
       <div
-        className="absolute pointer-events-none z-0 opacity-20"
-        style={{
-          left: mousePosition.x - 100,
-          top: mousePosition.y - 100,
-          width: "200px",
-          height: "200px",
-          background:
-            "radial-gradient(circle, rgba(147, 51, 234, 0.2) 0%, transparent 70%)",
-          borderRadius: "50%",
-          filter: "blur(40px)",
-          transition: "all 0.1s ease-out",
-        }}
-      ></div>
+        className="absolute bottom-10 right-10 w-60 h-60 bg-pink-400 rounded-full mix-blend-multiply filter blur-2xl opacity-20 animate-pulse"
+        style={{ animationDelay: "1500ms" }}
+      />
+      <div
+        className="absolute top-1/3 right-1/3 w-40 h-40 bg-indigo-700 rounded-full mix-blend-multiply filter blur-xl opacity-8 animate-pulse"
+        style={{ animationDelay: "3000ms" }}
+      />
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Navigation Tabs */}
@@ -206,13 +201,17 @@ const AboutMe = () => {
               Education Journey
             </h2>
             <div className="relative max-w-4xl mx-auto">
+              {/* Timeline container */}
+              <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-purple-600 to-pink-600 transform -translate-x-1/2"></div>
+
               {educationData.map((item, index) => (
                 <div
                   key={item.id}
-                  className={`flex items-center mb-12 ${
+                  className={`flex items-start mb-12 ${
                     index % 2 === 0 ? "flex-row" : "flex-row-reverse"
                   }`}
                 >
+                  {/* Education card */}
                   <div
                     className={`w-1/2 ${
                       index % 2 === 0 ? "pr-8 text-right" : "pl-8 text-left"
@@ -231,12 +230,13 @@ const AboutMe = () => {
                       <p className="text-gray-300">{item.degree}</p>
                     </div>
                   </div>
-                  <div className="relative flex-shrink-0">
-                    <div className="w-6 h-6 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full border-4 border-slate-950"></div>
-                    {index < educationData.length - 1 && (
-                      <div className="absolute top-6 left-1/2 w-0.5 h-16 bg-gradient-to-b from-purple-600 to-pink-600 transform -translate-x-1/2"></div>
-                    )}
+
+                  {/* Timeline dot */}
+                  <div className="relative flex-shrink-0 w-0">
+                    <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full border-4 border-slate-950"></div>
                   </div>
+
+                  {/* Empty space to balance the layout */}
                   <div className="w-1/2"></div>
                 </div>
               ))}

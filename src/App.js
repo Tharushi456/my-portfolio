@@ -27,12 +27,6 @@ function App() {
         className="absolute bottom-1/4 left-10 w-56 h-56 bg-violet-700 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse z-0"
         style={{ animationDelay: "4000ms" }}
       />
-      {/* Floating gradient orbs */}
-
-      <div
-        className="absolute bottom-1/3 right-1/3 w-24 h-24 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full opacity-8 animate-float z-0"
-        style={{ animationDelay: "2000ms" }}
-      />
 
       {/* Main Content */}
       <div className="relative z-10">
