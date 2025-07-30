@@ -30,7 +30,7 @@ function Contact() {
     );
 
     // Open default email client
-    window.location.href = `mailto:tharushi@email.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:dimalshacooray@gmail.com?subject=${subject}&body=${body}`;
 
     setSubmitStatus("success");
     setIsSubmitting(false);
@@ -40,6 +40,17 @@ function Contact() {
       setFormData({ name: "", email: "", subject: "", message: "" });
       setSubmitStatus("");
     }, 3000);
+  };
+
+  // CV download function
+  const handleCVDownload = () => {
+    const cvUrl = "/cv/cv.pdf";
+    const link = document.createElement('a');
+    link.href = cvUrl;
+    link.download = "cv.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -76,8 +87,8 @@ function Contact() {
               </p>
             </div>
 
-            {/* Contact Methods */}
             <div className="space-y-6">
+              {/* Email */}
               <div className="flex items-center gap-4 group cursor-pointer">
                 <div className="w-14 h-14 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   <span className="text-2xl">📧</span>
@@ -88,25 +99,35 @@ function Contact() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-4 group cursor-pointer">
-                <div className="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <span className="text-2xl">💼</span>
+              {/* LinkedIn */}
+              <a
+                href="https://www.linkedin.com/in/dimalshacooray"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
+              >
+                <div className="flex items-center gap-4 group cursor-pointer">
+                  <div className="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <span className="text-2xl">💼</span>
+                  </div>
+                  <div>
+                    <h3 className="text-white font-semibold text-lg">LinkedIn</h3>
+                    <p className="text-blue-300">Connect professionally</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-white font-semibold text-lg">LinkedIn</h3>
-                  <p className="text-blue-300">Connect professionally</p>
-                </div>
-              </div>
+              </a>
 
-              <div className="flex items-center gap-4 group cursor-pointer">
-                <div className="w-14 h-14 bg-gradient-to-r from-pink-600 to-purple-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <span className="text-2xl">⚡</span>
+              {/* CV Download */}
+              <div onClick={handleCVDownload} className="flex items-center gap-4 group cursor-pointer">
+                <div className="w-14 h-14 bg-gradient-to-r from-green-600 to-blue-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                  <span className="text-2xl">📄</span>
                 </div>
-                <div>
-                  <h3 className="text-white font-semibold text-lg">
-                    Quick Response
-                  </h3>
-                  <p className="text-pink-300">Usually within 24 hours</p>
+                <div className="text-left">
+                  <h3 className="text-white font-semibold text-lg">Download CV</h3>
+                  <p className="text-green-300">Get my latest resume</p>
+                </div>
+                <div className="ml-auto">
+                  <span className="text-white text-xl">⬇️</span>
                 </div>
               </div>
             </div>
@@ -118,7 +139,7 @@ function Contact() {
             <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl blur opacity-25 animate-pulse" />
 
             <div className="relative bg-slate-900/90 backdrop-blur-xl rounded-3xl p-8 border border-slate-700/50 shadow-2xl">
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="space-y-6">
                 <div className="text-center mb-8">
                   <h3 className="text-2xl font-bold text-white mb-2">
                     Send me a message
@@ -193,7 +214,7 @@ function Contact() {
 
                 {/* Submit Button */}
                 <button
-                  type="submit"
+                  onClick={handleSubmit}
                   disabled={isSubmitting}
                   className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 disabled:from-gray-600 disabled:to-gray-600 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25 disabled:scale-100 disabled:cursor-not-allowed"
                 >
@@ -218,7 +239,7 @@ function Contact() {
                     </p>
                   </div>
                 )}
-              </form>
+              </div>
             </div>
           </div>
         </div>

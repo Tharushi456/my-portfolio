@@ -13,7 +13,6 @@ Key Features:
 • Pet Shop Integration: Browse and purchase pet supplies, medications, and accessories
 • Community Forum: Connect with fellow pet owners, share experiences, and get advice
 • Health Monitoring: Track your pet's weight, medications, and health milestones
-• Emergency Services: Quick access to emergency veterinary services and contacts
 • Multi-pet Management: Manage multiple pets under one account
 
 Technical Implementation:
@@ -22,13 +21,14 @@ Built using modern web technologies including React for the frontend, Node.js wi
     gradient: "from-purple-600 to-pink-600",
     icon: "🐾",
     period: "Sep 2024 – Present",
-    deployedUrl: "https://petlife-marketing.com",
-    githubUrl: "https://github.com/username/petlife",
+    deployedUrl: "https://www.pet-lifes.com/",
+    githubUrl: "",
     snapshots: [
-      "https://via.placeholder.com/400x250/6366f1/white?text=PetLife+Dashboard",
-      "https://via.placeholder.com/400x250/8b5cf6/white?text=Appointment+Booking",
-      "https://via.placeholder.com/400x250/ec4899/white?text=Pet+Profile",
-      "https://via.placeholder.com/400x250/10b981/white?text=Community+Forum",
+      "/snapshots/homepage.png",
+      "/snapshots/login.png",
+      "/snapshots/channeling.png",
+      "/snapshots/carecenterbooking.png",
+      "/snapshots/docdash.jpg",
     ],
   },
   {
@@ -58,160 +58,142 @@ Implemented using pure JAX-RS without additional frameworks, demonstrating solid
     gradient: "from-blue-600 to-cyan-600",
     icon: "📚",
     period: "Feb 2025 – Apr 2025",
-    githubUrl: "https://github.com/username/bookstore-api",
+    githubUrl: "https://github.com/Tharushi456/bookstore-rest-api",
     snapshots: [],
   },
   {
     title: "Real-Time Ticketing System",
     description:
-      "Built a ticket booking platform using Java (Spring Boot) and ReactJS with real-time processing using Producer-Consumer pattern, CLI version, and MongoDB for data handling.",
-    fullDescription: `A sophisticated real-time ticketing system that handles high-concurrency ticket booking scenarios using advanced design patterns and modern technologies.
-
-System Architecture:
-• Producer-Consumer Pattern: Efficient handling of concurrent booking requests
-• Real-time Processing: Instant updates on ticket availability and booking status
-• Multi-interface Support: Both web interface (React) and CLI version available
-• Event-driven Architecture: Asynchronous processing for better performance
-
-Key Features:
-• Concurrent Booking: Handle multiple users booking tickets simultaneously
-• Real-time Updates: Live ticket availability updates across all connected clients
-• Queue Management: Fair queue system for high-demand events
-• Payment Integration: Secure payment processing with transaction management
-• Seat Selection: Interactive seat selection with real-time availability
-• Booking History: Complete booking history and ticket management
-
-Technical Implementation:
-Backend built with Spring Boot providing robust REST APIs, while the frontend uses ReactJS for a responsive user interface. MongoDB stores all transactional data with proper indexing for optimal performance. The CLI version demonstrates the same core functionality for server environments.`,
+      "Built a ticketing simulation system using Java (Spring Boot) and ReactJS, featuring real-time processing based on the Producer-Consumer pattern. Implemented both CLI and GUI versions, with dynamic ticket release and purchase logic based on configurable parameters such as release rate, retrieval rate, and capacity.",
+    fullDescription: `A comprehensive ticketing simulation system demonstrating concurrent vendor-customer interaction, robust configuration-driven logic, and seamless CLI/GUI integration with thorough validation and logging mechanisms.
+    
+    Core Features:
+    • Dual Implementation Architecture: The system is implemented in two forms — a terminal-based application using core Java, and a graphical user interface using Spring Boot (backend) and React (frontend). Both variants simulate the interaction between multiple vendors and customers through a shared ticket pool.
+    • Dynamic Ticket Management: Simulates real-time ticket release by vendors and purchase by customers using configurable parameters such as release rate, retrieval rate, and ticket pool capacity.
+    • Configurable Startup Inputs: System behavior is determined by user-defined configurations at startup, including:
+    
+    Total tickets per vendor
+    
+    Release and retrieval rates
+    
+    Maximum ticket pool capacity
+    
+    Number of vendors and customers
+    • Ticket Pool Synchronization: Maintains ticket count integrity by ensuring vendors pause release when capacity is full, and customers wait when tickets are unavailable.
+    • Concurrency Simulation: Emulates real-time concurrent actions of vendors and customers using thread-based logic in CLI and asynchronous event handling in GUI.
+    • Robust Input Validation: Prevents and handles invalid configuration inputs with appropriate error messaging in both CLI and GUI environments.
+    • Real-time Log Visualization:
+    
+    In CLI: ticketing events are logged clearly in the terminal
+    
+    In GUI: real-time updates of ticket availability and actions via dynamic UI components
+    
+    Modular Design:
+    • Ticket Pool Manager: Core logic module that manages ticket availability, enforces capacity limits, and synchronizes access between threads.
+    • Vendor Thread Handler: Releases tickets at a configured rate and checks against maximum pool capacity before releasing further.
+    • Customer Thread Handler: Purchases tickets from the pool, honoring the retrieval rate and handling unavailability gracefully.
+    • Configuration Loader: Collects and validates initial parameters, ensuring only valid numeric inputs are accepted.
+    • Log Manager:
+    
+    In CLI: formats and displays terminal logs for every vendor/customer action
+    
+    In GUI: communicates backend events to frontend for real-time UI updates
+    • GUI Frontend (React): Presents ticket logs, pool status, and configuration fields in an interactive and user-friendly layout.
+    • Backend Service Layer (Spring Boot): Manages concurrent vendor/customer logic and pushes updates to the frontend.
+    
+    System Capabilities:
+    • Multi-Agent Simulation: Supports simulation with various combinations of vendors and customers — one-to-one, one-to-many, many-to-one, and many-to-many.
+    • Capacity Enforcement: Automatically halts ticket release when pool capacity is reached and resumes once space becomes available.
+    • Performance Stability Under Load: Designed to handle long runtimes and large-scale scenarios with thousands of tickets without system crashes.
+    • Edge Case Handling: Manages scenarios with high or mismatched release/retrieval rates, zero available tickets, and excess vendors or customers.
+    • Log Consistency & Formatting: Ensures clean and non-overlapping logs across both CLI and GUI versions, even under concurrent access.
+    • File I/O-Free Real-Time Processing: Operates entirely in memory for speed and real-time responsiveness, especially in GUI.
+    • Interactive UI: GUI offers a clear view of live events and status updates, enhancing usability for simulation observers.
+    
+    This project exemplifies the principles of modular system design, multi-threaded programming, and modern full-stack development. It demonstrates the effective application of concurrency control, real-time UI rendering, and comprehensive input validation within both command-line and graphical environments.`,
     tech: ["Java", "Spring Boot", "ReactJS", "MongoDB"],
     gradient: "from-green-600 to-lime-600",
     icon: "🎫",
     period: "Sep 2024 – Dec 2024",
-    githubUrl: "https://github.com/username/ticketing-system",
+    githubUrl: "https://github.com/Tharushi456/Real-Time-Event-Ticketing-System-",
     snapshots: [
-      "https://via.placeholder.com/400x250/16a34a/white?text=Ticket+Booking",
-      "https://via.placeholder.com/400x250/65a30d/white?text=Real-time+Updates",
-      "https://via.placeholder.com/400x250/84cc16/white?text=Seat+Selection",
+      "/snapshots/ticketingsystem.png",
     ],
   },
   {
     title: "Plane Ticket Booking System",
     description:
       "Created a console-based Java flight booking system with OOP, reservation and cancellation, and optimized search and seat availability handling.",
-    fullDescription: `A comprehensive console-based flight booking system demonstrating solid object-oriented programming principles and efficient data management techniques.
+    fullDescription: `A comprehensive console-based plane seat reservation system demonstrating solid user-defined function design and efficient data validation techniques.
 
-Core Features:
-• Flight Search: Advanced search functionality with multiple filters (destination, date, price)
-• Seat Management: Intelligent seat allocation with availability tracking
-• Reservation System: Complete booking workflow from search to confirmation
-• Cancellation Handling: Flexible cancellation policies with automatic refund calculation
-• Passenger Management: Manage passenger details and travel preferences
-• Pricing Engine: Dynamic pricing based on availability and demand
-
-Object-Oriented Design:
-• Flight Class: Encapsulates flight details and operations
-• Passenger Class: Manages passenger information and booking history
-• Booking Class: Handles reservation logic and state management
-• Airport Class: Manages airport information and connections
-• Payment Class: Processes payments and manages transactions
-
-System Capabilities:
-• Multi-city Bookings: Support for complex itineraries with connections
-• Group Bookings: Handle multiple passengers in single transactions
-• Waitlist Management: Automatic notification when seats become available
-• Loyalty Program: Basic frequent flyer program integration
-• Report Generation: Generate booking reports and statistics
-
-The system showcases clean code practices, proper exception handling, and efficient algorithms for search and booking operations.`,
+    Core Features:
+    • Seat Reservation Management: Allows users to buy, cancel, and search for seat reservations in a small private aircraft with varying seat configurations across four rows (A–D).
+    • Seat Status Tracking: Utilizes standard 2D arrays to track the availability of each seat (0 = available, 1 = sold).
+    • Input Error Handling: Ensures that seat row and number inputs are within valid bounds and that seats are not double-booked or incorrectly canceled.
+    • Visual Seating Plan Display: Presents a visual layout of the aircraft seating where sold seats are marked with X and available seats with O.
+    • Ticket and Customer Info Handling: Captures personal information (name, surname, email) when a ticket is purchased, linking each ticket to a Person object.
+    • Persistent Ticket Recording: Saves each sold ticket's details (including passenger data) to a file named according to the seat code (e.g., B2.txt).
+    
+    Modular Design:
+    • buy_seat Function: Handles user input for selecting a seat and person information, checks seat availability, and stores ticket data.
+    • cancel_seat Function: Validates and cancels a seat reservation, also removing the associated ticket object.
+    • find_first_available Function: Scans the seat matrix in a defined row order (A–D) to find and display the first available seat.
+    • show_seating_plan Function: Outputs the formatted current seating chart, maintaining the spatial integrity of each row.
+    • print_tickets_info Function: Displays all sold tickets with corresponding passenger details and computes the total revenue.
+    • search_ticket Function: Looks up a specific seat to determine if it is sold and shows the related ticket and person data if found.
+    • Ticket save Method: Automatically writes ticket and person data to a uniquely named file upon purchase for external persistence.
+    
+    System Capabilities:
+    • Interactive Console Menu: Guides users with a clear and repeatable menu-driven interface to execute all major actions, including exit.
+    • Data-Driven Ticketing: Supports the addition, search, and deletion of seat records via structured object-oriented storage.
+    • Persistent File Output: Archives ticket data to individual text files named after their corresponding seat, ensuring traceability.
+    • Flexible Seat Configuration: Supports non-uniform row sizes and correct seat addressing using combined row-letter and seat-number codes.
+    • Object-Oriented Architecture: Leverages encapsulated Ticket and Person classes to model real-world entities effectively.
+    
+    This system showcases clean code structure, modular user-defined methods, robust validation routines, and practical file operations, delivering a full-featured console application for managing small aircraft seat reservations.`,
     tech: ["Java", "OOP"],
     gradient: "from-yellow-500 to-orange-500",
     icon: "✈️",
     period: "Feb 2024 – Mar 2024",
-    githubUrl: "https://github.com/username/plane-booking",
+    githubUrl: "https://github.com/Tharushi456/Plane-Ticket-Booking-System",
     snapshots: [],
   },
   {
     title: "Student Grading System (Python)",
     description:
       "Built a Python app to automate grading with data validation, logic for grade calculation, and reporting — improving grading efficiency.",
-    fullDescription: `An intelligent student grading system that automates the complex process of grade calculation and reporting, significantly improving educational workflow efficiency.
+    fullDescription: `A comprehensive console-based student progression prediction system demonstrating solid user-defined function design and efficient data validation techniques.
 
-Key Functionalities:
-• Automated Grading: Intelligent algorithms for calculating final grades based on multiple criteria
-• Data Validation: Robust input validation ensuring data integrity and consistency
-• Grade Analytics: Comprehensive statistical analysis of student performance
-• Report Generation: Professional reports for students, parents, and administrators
-• Grade Distribution: Visual representation of grade distributions and trends
-• Performance Tracking: Monitor student progress over time
-
-Features:
-• Multiple Grading Schemes: Support for various grading systems (letter grades, percentages, GPA)
-• Weighted Categories: Flexible weighting for different assignment types
-• Extra Credit Handling: Proper handling of bonus points and extra credit assignments
-• Grade Curves: Optional curve application for class-wide grade adjustments
-• Attendance Integration: Factor attendance into final grade calculations
-• Late Penalty Calculation: Automatic late penalty application with customizable rules
-
-Technical Highlights:
-• Data Processing: Efficient handling of large datasets with pandas integration
-• File I/O Operations: Support for multiple file formats (CSV, Excel, JSON)
-• Error Handling: Comprehensive error handling with user-friendly messages
-• Modular Design: Clean, maintainable code structure with separate modules
-• Unit Testing: Thorough test coverage ensuring reliability
-
-The system has proven to reduce grading time by 75% while improving accuracy and consistency.`,
+    Core Features:
+    • Progression Outcome Prediction: Determines accurate student outcomes (Progress, Progress (module trailer), Do not Progress – module retriever, or Exclude) based on credit input.
+    • Credit Validation: Ensures all inputs are valid integers and within the specified credit range (0 to 120 in steps of 20).
+    • Input Error Handling: Detects and handles invalid data types, out-of-range values, and incorrect total credits.
+    • Multiple Student Processing: Allows progression evaluation for multiple students until the user opts to quit.
+    • Graphical Histogram: Uses the graphics.py module to visually represent the count of students in each outcome category.
+    • Data Persistence: Stores progression outcomes in a list and exports results to a text file for future access.
+    
+    Modular Design:
+    • Input Validation Function: Handles all credit input validations and error prompts.
+    • Outcome Determination Function: Contains optimized conditional logic to determine the correct progression outcome without exhaustive enumeration.
+    • Loop Controller Function: Manages repeated input for multiple students and handles user prompts to continue or quit.
+    • Histogram Function: Generates a graphical histogram using graphics.py based on outcome counts.
+    • List Storage Function: Records each input set with the corresponding outcome into a list for later review.
+    • File I/O Function: Writes all progression results to a text file and reads them back for display.
+    
+    System Capabilities:
+    • Accurate Progression Mapping: Based on the university’s credit table with 28 valid combinations.
+    • Interactive Console Workflow: Clear prompts and feedback ensure ease of use for staff users.
+    • Dynamic Histogram Visualization: Immediate graphical feedback on student performance distribution.
+    • Structured Outcome Logging: Maintains detailed logs of input data for audit or review.
+    • Readable Output Format: Displays outcomes in a clear, concise format during and after the session.
+    
+    The system showcases clean code practices, modularity through user-defined functions, precise error handling, and efficient logic to determine student progression outcomes.`,
     tech: ["Python"],
     gradient: "from-pink-500 to-red-500",
     icon: "🧮",
     period: "Nov 2023 – Dec 2023",
-    githubUrl: "https://github.com/username/grading-system",
+    githubUrl: "https://github.com/Tharushi456/Grading-System",
     snapshots: [],
-  },
-  {
-    title: "Pet Healthcare Management System",
-    description:
-      "PetLife full-stack app with React frontend and Node backend. Features health tracking, digital vaccination, Google Calendar integration, and secure auth.",
-    fullDescription: `A comprehensive pet healthcare management system that provides pet owners with powerful tools to monitor and manage their pets' health and wellness.
-
-Health Management Features:
-• Digital Health Records: Complete medical history tracking with vet visit logs
-• Vaccination Scheduler: Automated reminders for vaccinations and boosters
-• Medication Tracking: Daily medication reminders with dosage tracking
-• Weight Monitoring: Track weight changes with visual charts and trends
-• Symptom Logging: Record and track health symptoms and behaviors
-• Emergency Contacts: Quick access to emergency veterinary services
-
-Integration Capabilities:
-• Google Calendar Sync: Automatically sync appointments and reminders
-• Vet Clinic Integration: Direct communication with veterinary practices
-• Prescription Management: Digital prescription tracking and refill reminders
-• Insurance Integration: Connect with pet insurance providers for claims
-
-Technical Architecture:
-• Frontend: React with modern hooks and context API for state management
-• Backend: Node.js with Express providing robust REST API endpoints
-• Database: MongoDB with proper indexing for optimal query performance
-• Authentication: JWT-based secure authentication with role-based access
-• Real-time Features: WebSocket integration for live notifications
-• File Upload: Secure image upload for pet photos and medical documents
-
-Security & Privacy:
-• Data Encryption: All sensitive data encrypted at rest and in transit
-• HIPAA Compliance: Following healthcare data protection standards
-• User Privacy: Strict privacy controls with granular sharing permissions
-• Backup System: Automated daily backups with disaster recovery plans
-
-The system has helped over 1,000 pet owners better manage their pets' healthcare needs.`,
-    tech: ["ReactJS", "NodeJS", "MongoDB"],
-    gradient: "from-indigo-600 to-violet-600",
-    icon: "🐶",
-    period: "Sep 2024 – Present",
-    githubUrl: "https://github.com/username/pet-healthcare",
-    snapshots: [
-      "https://via.placeholder.com/400x250/4f46e5/white?text=Health+Dashboard",
-      "https://via.placeholder.com/400x250/7c3aed/white?text=Vaccination+Tracker",
-      "https://via.placeholder.com/400x250/6366f1/white?text=Calendar+Integration",
-    ],
   },
 ];
 
@@ -307,15 +289,18 @@ function Projects() {
                       <span className="text-lg">🚀</span>
                     </div>
                   </button>
-                  <button
-                    onClick={() => window.open(project.githubUrl, "_blank")}
-                    className="px-6 py-4 border-2 border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white rounded-xl transition-all duration-300 transform hover:scale-105 font-semibold"
-                  >
-                    <div className="flex items-center gap-2">
-                      <span>GitHub</span>
-                      <span className="text-lg">⚡</span>
-                    </div>
-                  </button>
+                  {project.githubUrl && (
+                    <button
+                      onClick={() => window.open(project.githubUrl, "_blank")}
+                      className="px-6 py-4 border-2 border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white rounded-xl transition-all duration-300 transform hover:scale-105 font-semibold"
+                    >
+                      <div className="flex items-center gap-2">
+                        <span>GitHub</span>
+                        <span className="text-lg">⚡</span>
+                      </div>
+                    </button>
+                  )}
+
                 </div>
 
                 <div className="absolute bottom-4 left-4 w-16 h-16 bg-gradient-to-tr from-blue-500/10 to-purple-500/10 rounded-full blur-lg" />
@@ -425,8 +410,9 @@ function Projects() {
                         <img
                           src={snapshot}
                           alt={`${selectedProject.title} snapshot ${idx + 1}`}
-                          className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
+                          className="w-full max-h-[400px] object-contain hover:scale-105 transition-transform duration-300"
                         />
+
                       </div>
                     </div>
                   ))}
@@ -436,6 +422,7 @@ function Projects() {
 
             {/* Action Buttons */}
             <div className="flex gap-4 justify-center pt-4 border-t border-slate-700">
+            {selectedProject.githubUrl && (
               <button
                 onClick={() => window.open(selectedProject.githubUrl, "_blank")}
                 className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
@@ -443,6 +430,8 @@ function Projects() {
                 <span>View on GitHub</span>
                 <span>⚡</span>
               </button>
+            )}
+
             </div>
           </div>
         </div>

@@ -92,25 +92,24 @@ const AboutMe = () => {
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Navigation Tabs */}
-        <div className="flex justify-center mb-16 mt-8">
-          <div className="bg-black/50 backdrop-blur-lg rounded-full p-2 border border-white/5">
-            {["about", "education", "skills", "certifications"].map(
-              (section) => (
-                <button
-                  key={section}
-                  onClick={() => setActiveSection(section)}
-                  className={`px-6 py-3 rounded-full transition-all duration-300 capitalize font-medium ${
-                    activeSection === section
-                      ? "bg-gradient-to-r from-purple-700 to-pink-700 text-white shadow-lg"
-                      : "text-gray-400 hover:text-white hover:bg-white/5"
-                  }`}
-                >
-                  {section}
-                </button>
-              )
-            )}
+        <div className="flex justify-center mb-16 mt-8 px-4">
+          <div className="bg-black/50 backdrop-blur-lg rounded-full p-2 border border-white/5 flex flex-wrap gap-2 justify-center">
+            {["about", "education", "skills", "certifications"].map((section) => (
+              <button
+                key={section}
+                onClick={() => setActiveSection(section)}
+                className={`px-5 md:px-6 py-2 md:py-3 text-sm md:text-base rounded-full transition-all duration-300 capitalize font-medium ${
+                  activeSection === section
+                    ? "bg-gradient-to-r from-purple-700 to-pink-700 text-white shadow-lg"
+                    : "text-gray-400 hover:text-white hover:bg-white/5"
+                }`}
+              >
+                {section}
+              </button>
+            ))}
           </div>
         </div>
+
 
         {/* About Section */}
         {activeSection === "about" && (
