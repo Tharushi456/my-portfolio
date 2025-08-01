@@ -24,11 +24,11 @@ Built using modern web technologies including React for the frontend, Node.js wi
     deployedUrl: "https://www.pet-lifes.com/",
     githubUrl: "",
     snapshots: [
-      "/snapshots/homepage.png",
-      "/snapshots/login.png",
-      "/snapshots/channeling.png",
-      "/snapshots/carecenterbooking.png",
-      "/snapshots/docdash.jpg",
+      process.env.PUBLIC_URL + "/snapshots/homepage.png",
+      process.env.PUBLIC_URL + "/snapshots/login.png",
+      process.env.PUBLIC_URL + "/snapshots/channeling.png",
+      process.env.PUBLIC_URL + "/snapshots/carecenterbooking.png",
+      process.env.PUBLIC_URL + "/snapshots/docdash.jpg",
     ],
   },
   {
@@ -115,10 +115,9 @@ Implemented using pure JAX-RS without additional frameworks, demonstrating solid
     gradient: "from-green-600 to-lime-600",
     icon: "🎫",
     period: "Sep 2024 – Dec 2024",
-    githubUrl: "https://github.com/Tharushi456/Real-Time-Event-Ticketing-System-",
-    snapshots: [
-      "/snapshots/ticketingsystem.png",
-    ],
+    githubUrl:
+      "https://github.com/Tharushi456/Real-Time-Event-Ticketing-System-",
+    snapshots: [process.env.PUBLIC_URL + "/snapshots/ticketingsystem.png"],
   },
   {
     title: "Plane Ticket Booking System",
@@ -300,7 +299,6 @@ function Projects() {
                       </div>
                     </button>
                   )}
-
                 </div>
 
                 <div className="absolute bottom-4 left-4 w-16 h-16 bg-gradient-to-tr from-blue-500/10 to-purple-500/10 rounded-full blur-lg" />
@@ -412,7 +410,6 @@ function Projects() {
                           alt={`${selectedProject.title} snapshot ${idx + 1}`}
                           className="w-full max-h-[400px] object-contain hover:scale-105 transition-transform duration-300"
                         />
-
                       </div>
                     </div>
                   ))}
@@ -422,16 +419,17 @@ function Projects() {
 
             {/* Action Buttons */}
             <div className="flex gap-4 justify-center pt-4 border-t border-slate-700">
-            {selectedProject.githubUrl && (
-              <button
-                onClick={() => window.open(selectedProject.githubUrl, "_blank")}
-                className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
-              >
-                <span>View on GitHub</span>
-                <span>⚡</span>
-              </button>
-            )}
-
+              {selectedProject.githubUrl && (
+                <button
+                  onClick={() =>
+                    window.open(selectedProject.githubUrl, "_blank")
+                  }
+                  className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
+                >
+                  <span>View on GitHub</span>
+                  <span>⚡</span>
+                </button>
+              )}
             </div>
           </div>
         </div>

@@ -45,7 +45,7 @@ const AboutMe = () => {
       provider: "HackerRank",
       year: "Jul 2025",
       credentialId: "A34B1E16A841",
-      pdf: "/certificates/sql-intermediate.png",
+      pdf: process.env.PUBLIC_URL + "/certificates/sql-intermediate.png",
       color: "from-purple-700 to-indigo-700",
     },
     {
@@ -53,7 +53,7 @@ const AboutMe = () => {
       provider: "LinkedIn Learning",
       year: "Nov 2024",
       credentialId: null,
-      pdf: "/certificates/spring-boot-training.png",
+      pdf: process.env.PUBLIC_URL + "/certificates/spring-boot-training.png",
       color: "from-pink-700 to-rose-700",
     },
     {
@@ -61,7 +61,7 @@ const AboutMe = () => {
       provider: "HackerRank",
       year: "Sep 2024",
       credentialId: "3E846A5F166D",
-      pdf: "/certificates/python-basic.png",
+      pdf: process.env.PUBLIC_URL + "/certificates/python-basic.png",
       color: "from-yellow-700 to-orange-700",
     },
     {
@@ -69,7 +69,7 @@ const AboutMe = () => {
       provider: "University of Moratuwa",
       year: "Jun 2023",
       credentialId: "QEPmsAu9KC",
-      pdf: "/certificates/python-for-beginners.pdf",
+      pdf: process.env.PUBLIC_URL + "/certificates/python-for-beginners.pdf",
       color: "from-blue-800 to-teal-800",
     },
   ];
@@ -94,22 +94,23 @@ const AboutMe = () => {
         {/* Navigation Tabs */}
         <div className="flex justify-center mb-16 mt-8 px-4">
           <div className="bg-black/50 backdrop-blur-lg rounded-full p-2 border border-white/5 flex flex-wrap gap-2 justify-center">
-            {["about", "education", "skills", "certifications"].map((section) => (
-              <button
-                key={section}
-                onClick={() => setActiveSection(section)}
-                className={`px-5 md:px-6 py-2 md:py-3 text-sm md:text-base rounded-full transition-all duration-300 capitalize font-medium ${
-                  activeSection === section
-                    ? "bg-gradient-to-r from-purple-700 to-pink-700 text-white shadow-lg"
-                    : "text-gray-400 hover:text-white hover:bg-white/5"
-                }`}
-              >
-                {section}
-              </button>
-            ))}
+            {["about", "education", "skills", "certifications"].map(
+              (section) => (
+                <button
+                  key={section}
+                  onClick={() => setActiveSection(section)}
+                  className={`px-5 md:px-6 py-2 md:py-3 text-sm md:text-base rounded-full transition-all duration-300 capitalize font-medium ${
+                    activeSection === section
+                      ? "bg-gradient-to-r from-purple-700 to-pink-700 text-white shadow-lg"
+                      : "text-gray-400 hover:text-white hover:bg-white/5"
+                  }`}
+                >
+                  {section}
+                </button>
+              )
+            )}
           </div>
         </div>
-
 
         {/* About Section */}
         {activeSection === "about" && (

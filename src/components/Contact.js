@@ -44,8 +44,8 @@ function Contact() {
 
   // CV download function
   const handleCVDownload = () => {
-    const cvUrl = "/cv/cv.pdf";
-    const link = document.createElement('a');
+    const cvUrl = process.env.PUBLIC_URL + "/cv/cv.pdf";
+    const link = document.createElement("a");
     link.href = cvUrl;
     link.download = "cv.pdf";
     document.body.appendChild(link);
@@ -111,19 +111,26 @@ function Contact() {
                     <span className="text-2xl">💼</span>
                   </div>
                   <div>
-                    <h3 className="text-white font-semibold text-lg">LinkedIn</h3>
+                    <h3 className="text-white font-semibold text-lg">
+                      LinkedIn
+                    </h3>
                     <p className="text-blue-300">Connect professionally</p>
                   </div>
                 </div>
               </a>
 
               {/* CV Download */}
-              <div onClick={handleCVDownload} className="flex items-center gap-4 group cursor-pointer">
+              <div
+                onClick={handleCVDownload}
+                className="flex items-center gap-4 group cursor-pointer"
+              >
                 <div className="w-14 h-14 bg-gradient-to-r from-green-600 to-blue-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   <span className="text-2xl">📄</span>
                 </div>
                 <div className="text-left">
-                  <h3 className="text-white font-semibold text-lg">Download CV</h3>
+                  <h3 className="text-white font-semibold text-lg">
+                    Download CV
+                  </h3>
                   <p className="text-green-300">Get my latest resume</p>
                 </div>
                 <div className="ml-auto">

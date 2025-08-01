@@ -11,7 +11,7 @@ const Header = () => {
         <div className="md:w-1/2 flex justify-center animate-fade-in-left">
           <div className="relative w-96 h-96 rounded-full overflow-hidden border-8 border-[#bc749f] shadow-2xl">
             <img
-              src="/pic2.jpg"
+              src={process.env.PUBLIC_URL + "/pic2.jpg"}
               alt="Tharushi"
               className="object-cover w-full h-full hover:scale-110 transition duration-700"
             />
