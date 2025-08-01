@@ -9,16 +9,16 @@ const Header = () => {
       <div className="flex flex-col md:flex-row items-center justify-between w-full gap-12 relative z-10">
         {/* Left image section */}
         <div className="md:w-1/2 flex justify-center animate-fade-in-left">
-          <div className="relative w-[300px] h-[300px] rounded-full overflow-hidden border-8 border-[#bc749f] shadow-2xl group">
+          <div className="relative w-[280px] h-[280px] sm:w-[300px] sm:h-[300px] rounded-full overflow-hidden border-8 border-[#bc749f] shadow-2xl group">
             <div className="absolute inset-0 bg-gradient-to-r from-[#bc749f]/20 to-[#a45383]/20 rounded-full blur-sm group-hover:blur-md transition-all duration-300"></div>
 
             <img
               src={process.env.PUBLIC_URL + "/pic2.jpg"}
               alt="Tharushi"
-              className="object-cover w-full h-full transform group-hover:scale-105 transition-all duration-500 ease-out relative z-10"
+              className="object-cover w-full h-full transform group-hover:scale-105 transition-all duration-500 ease-out relative z-10 rounded-full"
             />
 
-            <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[#bc749f]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[#bc749f]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
 
             <div className="absolute -inset-2 bg-gradient-to-r from-[#bc749f] via-[#a45383] to-[#bc749f] rounded-full opacity-0 group-hover:opacity-30 blur-sm animate-pulse transition-opacity duration-300"></div>
           </div>
