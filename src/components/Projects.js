@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const projects = [
   {
@@ -16,7 +16,7 @@ Key Features:
 • Multi-pet Management: Manage multiple pets under one account
 
 Technical Implementation:
-Built using modern web technologies including React for the frontend, Node.js with Express for the backend, and MongoDB for data persistence. The application features JWT authentication, real-time notifications, and responsive design for mobile and desktop users.`,
+Built using modern web technologies including React for the frontend, Node.js with Express for the backend, and MongoDB for data persistence. Real-time notifications, and responsive design for mobile and desktop users.`,
     tech: ["React", "Node.js", "MongoDB", "Express"],
     gradient: "from-purple-600 to-pink-600",
     icon: "🐾",
@@ -180,7 +180,7 @@ Implemented using pure JAX-RS without additional frameworks, demonstrating solid
     • File I/O Function: Writes all progression results to a text file and reads them back for display.
     
     System Capabilities:
-    • Accurate Progression Mapping: Based on the university’s credit table with 28 valid combinations.
+    • Accurate Progression Mapping: Based on the university's credit table with 28 valid combinations.
     • Interactive Console Workflow: Clear prompts and feedback ensure ease of use for staff users.
     • Dynamic Histogram Visualization: Immediate graphical feedback on student performance distribution.
     • Structured Outcome Logging: Maintains detailed logs of input data for audit or review.
@@ -199,7 +199,19 @@ Implemented using pure JAX-RS without additional frameworks, demonstrating solid
 function Projects() {
   const [showAll, setShowAll] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
   const visibleProjects = showAll ? projects : projects.slice(0, 4);
+
+  useEffect(() => {
+    // Simulate loading time for projects
+    const loadingTimer = setTimeout(() => {
+      setIsLoading(false);
+      setIsVisible(true);
+    }, 1800);
+
+    return () => clearTimeout(loadingTimer);
+  }, []);
 
   const handleViewProject = (project) => {
     setSelectedProject(project);
@@ -209,10 +221,80 @@ function Projects() {
     setSelectedProject(null);
   };
 
+  // Loading component
+  if (isLoading) {
+    return (
+      <section className="min-h-screen flex items-center justify-center bg-slate-950 relative overflow-hidden">
+        {/* Animated background orbs during loading */}
+        <div className="absolute top-20 left-20 w-60 h-60 bg-purple-700 rounded-full mix-blend-multiply filter blur-2xl opacity-20 animate-pulse" />
+        <div
+          className="absolute bottom-20 right-20 w-80 h-80 bg-pink-700 rounded-full mix-blend-multiply filter blur-2xl opacity-20 animate-pulse"
+          style={{ animationDelay: "1200ms" }}
+        />
+        <div
+          className="absolute top-1/2 left-1/4 w-40 h-40 bg-indigo-700 rounded-full mix-blend-multiply filter blur-xl opacity-15 animate-pulse"
+          style={{ animationDelay: "2400ms" }}
+        />
+
+        <div className="text-center z-10">
+          {/* loading spinner */}
+          <div className="relative mb-8">
+            <div className="w-24 h-24 border-4 border-purple-700/30 border-t-purple-600 rounded-full animate-spin mx-auto"></div>
+            <div
+              className="absolute inset-0 w-24 h-24 border-4 border-transparent border-r-pink-600 rounded-full animate-spin mx-auto"
+              style={{ animationDirection: "reverse", animationDuration: "2s" }}
+            ></div>
+
+            <div
+              className="absolute inset-4 w-16 h-16 border-2 border-transparent border-l-indigo-600 rounded-full animate-spin mx-auto"
+              style={{ animationDuration: "1s" }}
+            ></div>
+          </div>
+
+          {/* Loading text */}
+          <div className="text-3xl font-bold bg-gradient-to-r from-purple-300 via-pink-300 to-purple-300 bg-clip-text text-transparent animate-pulse mb-2">
+            Loading Projects...
+          </div>
+
+          <div className="text-gray-400 text-lg animate-pulse">
+            Preparing showcase ✨
+          </div>
+
+          {/*loading dots animation */}
+          <div className="flex justify-center space-x-3 mt-6">
+            <div className="w-3 h-3 bg-purple-600 rounded-full animate-bounce"></div>
+            <div
+              className="w-3 h-3 bg-pink-600 rounded-full animate-bounce"
+              style={{ animationDelay: "0.1s" }}
+            ></div>
+            <div
+              className="w-3 h-3 bg-indigo-600 rounded-full animate-bounce"
+              style={{ animationDelay: "0.2s" }}
+            ></div>
+            <div
+              className="w-3 h-3 bg-purple-600 rounded-full animate-bounce"
+              style={{ animationDelay: "0.3s" }}
+            ></div>
+          </div>
+
+          {/* Progress bar */}
+          <div className="w-64 h-1 bg-slate-800 rounded-full mx-auto mt-8 overflow-hidden">
+            <div
+              className="h-full bg-gradient-to-r from-purple-600 to-pink-600 rounded-full animate-pulse"
+              style={{ width: "70%" }}
+            ></div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section
       id="projects"
-      className="py-32 px-6 relative overflow-hidden min-h-screen"
+      className={`py-32 px-6 relative overflow-hidden min-h-screen transform transition-all duration-1000 ${
+        isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+      }`}
     >
       {/* Background Orbs */}
       <div className="absolute top-20 left-20 w-60 h-60 bg-purple-700 rounded-full mix-blend-multiply filter blur-2xl opacity-12 animate-pulse" />

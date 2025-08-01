@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -9,6 +9,20 @@ function Contact() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState("");
+  const [isVisible, setIsVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading time
+    const loadingTimer = setTimeout(() => {
+      setIsLoading(false);
+      setIsVisible(true);
+    }, 1500);
+
+    return () => {
+      clearTimeout(loadingTimer);
+    };
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -53,6 +67,56 @@ function Contact() {
     document.body.removeChild(link);
   };
 
+  // Loading component
+  if (isLoading) {
+    return (
+      <section className="min-h-screen flex items-center justify-center bg-slate-950 relative overflow-hidden">
+        {/* Animated background orbs during loading */}
+        <div className="absolute top-20 left-10 w-72 h-72 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" />
+        <div
+          className="absolute bottom-10 right-10 w-96 h-96 bg-pink-600 rounded-full mix-blend-multiply filter blur-3xl opacity-15 animate-pulse"
+          style={{ animationDelay: "1000ms" }}
+        />
+        <div
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse"
+          style={{ animationDelay: "2000ms" }}
+        />
+
+        <div className="text-center z-10">
+          {/*loading spinner */}
+          <div className="relative mb-8">
+            <div className="w-20 h-20 border-4 border-purple-700/30 border-t-purple-600 rounded-full animate-spin mx-auto"></div>
+            <div
+              className="absolute inset-0 w-20 h-20 border-4 border-transparent border-r-pink-600 rounded-full animate-spin mx-auto"
+              style={{
+                animationDirection: "reverse",
+                animationDuration: "1.5s",
+              }}
+            ></div>
+          </div>
+
+          {/* Loading text*/}
+          <div className="text-2xl font-bold bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent animate-pulse">
+            Loading Contact...
+          </div>
+
+          {/* Loading dots animation */}
+          <div className="flex justify-center space-x-2 mt-4">
+            <div className="w-2 h-2 bg-purple-600 rounded-full animate-bounce"></div>
+            <div
+              className="w-2 h-2 bg-purple-600 rounded-full animate-bounce"
+              style={{ animationDelay: "0.1s" }}
+            ></div>
+            <div
+              className="w-2 h-2 bg-purple-600 rounded-full animate-bounce"
+              style={{ animationDelay: "0.2s" }}
+            ></div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section
       id="contact"
@@ -69,7 +133,11 @@ function Contact() {
         style={{ animationDelay: "2s" }}
       />
 
-      <div className="max-w-6xl mx-auto relative z-10 w-full">
+      <div
+        className={`max-w-6xl mx-auto relative z-10 w-full transform transition-all duration-700 ${
+          isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+        }`}
+      >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left Side - Contact Info */}
           <div className="space-y-12">
@@ -242,7 +310,7 @@ function Contact() {
                 {submitStatus === "success" && (
                   <div className="text-center p-4 bg-green-900/30 border border-green-500/30 rounded-xl">
                     <p className="text-green-300 font-semibold">
-                      🎉 Email client opened! Thanks for reaching out!
+                      🎉 Thanks for reaching out!
                     </p>
                   </div>
                 )}

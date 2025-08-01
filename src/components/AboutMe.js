@@ -4,14 +4,24 @@ const AboutMe = () => {
   const [activeSection, setActiveSection] = useState("about");
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setIsVisible(true);
+    // Simulate loading time
+    const loadingTimer = setTimeout(() => {
+      setIsLoading(false);
+      setIsVisible(true);
+    }, 1500);
+
     const handleMouseMove = (e) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
     window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      clearTimeout(loadingTimer);
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
   }, []);
 
   const skillCategories = {
@@ -73,6 +83,56 @@ const AboutMe = () => {
       color: "from-blue-800 to-teal-800",
     },
   ];
+
+  // Loading component
+  if (isLoading) {
+    return (
+      <section className="min-h-screen flex items-center justify-center bg-slate-950 relative overflow-hidden">
+        {/* Animated background orbs during loading */}
+        <div className="absolute top-40 left-20 w-60 h-60 bg-purple-700 rounded-full mix-blend-multiply filter blur-2xl opacity-20 animate-pulse" />
+        <div
+          className="absolute bottom-10 right-10 w-60 h-60 bg-pink-400 rounded-full mix-blend-multiply filter blur-2xl opacity-20 animate-pulse"
+          style={{ animationDelay: "1000ms" }}
+        />
+        <div
+          className="absolute top-1/3 right-1/3 w-40 h-40 bg-indigo-700 rounded-full mix-blend-multiply filter blur-xl opacity-15 animate-pulse"
+          style={{ animationDelay: "2000ms" }}
+        />
+
+        <div className="text-center z-10">
+          {/* loading spinner */}
+          <div className="relative mb-8">
+            <div className="w-20 h-20 border-4 border-purple-700/30 border-t-purple-600 rounded-full animate-spin mx-auto"></div>
+            <div
+              className="absolute inset-0 w-20 h-20 border-4 border-transparent border-r-pink-600 rounded-full animate-spin mx-auto"
+              style={{
+                animationDirection: "reverse",
+                animationDuration: "1.5s",
+              }}
+            ></div>
+          </div>
+
+          {/* Loading text  */}
+          <div className="text-2xl font-bold bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent animate-pulse">
+            Loading...
+          </div>
+
+          {/* Loading dots animation */}
+          <div className="flex justify-center space-x-2 mt-4">
+            <div className="w-2 h-2 bg-purple-600 rounded-full animate-bounce"></div>
+            <div
+              className="w-2 h-2 bg-purple-600 rounded-full animate-bounce"
+              style={{ animationDelay: "0.1s" }}
+            ></div>
+            <div
+              className="w-2 h-2 bg-purple-600 rounded-full animate-bounce"
+              style={{ animationDelay: "0.2s" }}
+            ></div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section

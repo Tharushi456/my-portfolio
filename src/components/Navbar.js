@@ -43,9 +43,8 @@ const Navbar = () => {
 
   const handleMobileMenuClick = (href) => {
     setIsMobileMenuOpen(false);
-    // Small delay to ensure menu closes before scrolling
     setTimeout(() => {
-      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+      document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
     }, 100);
   };
 
@@ -99,12 +98,14 @@ const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <div className="md:hidden">
-            <button 
+            <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="p-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-white hover:bg-white/10 transition-all duration-300"
             >
               <svg
-                className={`w-6 h-6 transition-transform duration-300 ${isMobileMenuOpen ? 'rotate-90' : ''}`}
+                className={`w-6 h-6 transition-transform duration-300 ${
+                  isMobileMenuOpen ? "rotate-90" : ""
+                }`}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -137,25 +138,37 @@ const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
           onClick={() => setIsMobileMenuOpen(false)}
         />
       )}
 
       {/* Mobile Menu */}
-      <div className={`fixed top-0 right-0 h-full w-72 bg-gradient-to-br from-slate-950/95 via-purple-950/95 to-slate-950/95 backdrop-blur-xl border-l border-purple-500/20 z-50 transform transition-transform duration-300 ease-out md:hidden ${
-        isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-      }`}>
+      <div
+        className={`fixed top-0 right-0 h-full w-72 bg-gradient-to-br from-slate-950/95 via-purple-950/95 to-slate-950/95 backdrop-blur-xl border-l border-purple-500/20 z-50 transform transition-transform duration-300 ease-out md:hidden ${
+          isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
         <div className="p-6">
           {/* Close button */}
           <div className="flex justify-end mb-8">
-            <button 
+            <button
               onClick={() => setIsMobileMenuOpen(false)}
               className="p-2 rounded-full bg-white/5 backdrop-blur-sm border border-white/10 text-white hover:bg-white/10 transition-all duration-300"
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
           </div>
@@ -174,17 +187,21 @@ const Navbar = () => {
                 }`}
                 style={{
                   animationDelay: `${index * 100}ms`,
-                  animation: isMobileMenuOpen ? 'slideInRight 0.3s ease-out forwards' : ''
+                  animation: isMobileMenuOpen
+                    ? "slideInRight 0.3s ease-out forwards"
+                    : "",
                 }}
               >
                 <div className="flex items-center space-x-4">
                   {/* Icon indicators */}
-                  <div className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    activeSection === item.href.substring(1)
-                      ? "bg-gradient-to-r from-purple-500 to-pink-500"
-                      : "bg-gray-600 group-hover:bg-purple-400"
-                  }`}></div>
-                  
+                  <div
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      activeSection === item.href.substring(1)
+                        ? "bg-gradient-to-r from-purple-500 to-pink-500"
+                        : "bg-gray-600 group-hover:bg-purple-400"
+                    }`}
+                  ></div>
+
                   <span className="relative z-10">{item.label}</span>
                 </div>
 
