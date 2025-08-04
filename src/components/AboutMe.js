@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const AboutMe = () => {
   const [activeSection, setActiveSection] = useState("about");
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [scrollY, setScrollY] = useState(0);
+  const sectionRef = useRef(null);
 
   useEffect(() => {
     // Simulate loading time
@@ -18,9 +20,30 @@ const AboutMe = () => {
     };
     window.addEventListener("mousemove", handleMouseMove);
 
+    const handleScroll = () => {
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        const scrollPosition = window.scrollY;
+        setScrollY(scrollPosition);
+
+        // Calculate visibility based on scroll position
+        const windowHeight = window.innerHeight;
+        const elementVisible = 150;
+        const elementPosition = rect.top;
+
+        if (elementPosition < windowHeight - elementVisible) {
+          setIsVisible(true);
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Initial check
+
     return () => {
       clearTimeout(loadingTimer);
       window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -137,28 +160,68 @@ const AboutMe = () => {
   return (
     <section
       id="about"
+      ref={sectionRef}
       className="min-h-screen py-20 px-4 md:px-8 lg:px-16 relative overflow-hidden"
+      style={{
+        transform: `translateY(${Math.min(scrollY * 0.2, 100)}px)`,
+        transition: "transform 0.5s ease-out",
+      }}
     >
-      {/* Background animated orbs */}
-      <div className="absolute top-40 left-20 w-60 h-60 bg-purple-700 rounded-full mix-blend-multiply filter blur-2xl opacity-10 animate-pulse" />
+      {/* Parallax background elements */}
+      <div
+        className="absolute top-40 left-20 w-60 h-60 bg-purple-700 rounded-full mix-blend-multiply filter blur-2xl opacity-10 animate-pulse"
+        style={{
+          transform: `translate(${mousePosition.x * 0.02}px, ${
+            mousePosition.y * 0.02
+          }px)`,
+          transition: "transform 0.3s ease-out",
+        }}
+      />
       <div
         className="absolute bottom-10 right-10 w-60 h-60 bg-pink-400 rounded-full mix-blend-multiply filter blur-2xl opacity-20 animate-pulse"
-        style={{ animationDelay: "1500ms" }}
+        style={{
+          animationDelay: "1500ms",
+          transform: `translate(${-mousePosition.x * 0.03}px, ${
+            -mousePosition.y * 0.03
+          }px)`,
+          transition: "transform 0.4s ease-out",
+        }}
       />
       <div
         className="absolute top-1/3 right-1/3 w-40 h-40 bg-indigo-700 rounded-full mix-blend-multiply filter blur-xl opacity-8 animate-pulse"
-        style={{ animationDelay: "3000ms" }}
+        style={{
+          animationDelay: "3000ms",
+          transform: `translate(${mousePosition.x * 0.01}px, ${
+            mousePosition.y * 0.01
+          }px)`,
+          transition: "transform 0.5s ease-out",
+        }}
       />
 
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Navigation Tabs */}
-        <div className="flex justify-center mb-16 mt-8 px-4">
+        {/* Navigation Tabs with scroll animation */}
+        <div
+          className="flex justify-center mb-16 mt-8 px-4"
+          style={{
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? "translateY(0)" : "translateY(20px)",
+            transition: "opacity 0.6s ease-out, transform 0.6s ease-out",
+          }}
+        >
           <div className="bg-black/50 backdrop-blur-lg rounded-full p-2 border border-white/5 flex flex-wrap gap-2 justify-center">
             {["about", "education", "skills", "certifications"].map(
               (section) => (
                 <button
                   key={section}
-                  onClick={() => setActiveSection(section)}
+                  onClick={() => {
+                    setActiveSection(section);
+                    // Smooth scroll to the section if needed
+                    if (sectionRef.current) {
+                      sectionRef.current.scrollIntoView({
+                        behavior: "smooth",
+                      });
+                    }
+                  }}
                   className={`px-5 md:px-6 py-2 md:py-3 text-sm md:text-base rounded-full transition-all duration-300 capitalize font-medium ${
                     activeSection === section
                       ? "bg-gradient-to-r from-purple-700 to-pink-700 text-white shadow-lg"
@@ -182,15 +245,38 @@ const AboutMe = () => {
             }`}
           >
             <div className="text-center mb-16">
-              <h1 className="text-5xl font-bold text-center bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent mb-16 mt-8">
+              <h1
+                className="text-5xl font-bold text-center bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent mb-16 mt-8"
+                style={{
+                  transform: `translateY(${Math.min(scrollY * 0.1, 50)}px)`,
+                  transition: "transform 0.4s ease-out",
+                }}
+              >
                 About Me
               </h1>
-              <div className="w-32 h-1 bg-gradient-to-r from-purple-600 to-pink-600 mx-auto rounded-full"></div>
+              <div
+                className="w-32 h-1 bg-gradient-to-r from-purple-600 to-pink-600 mx-auto rounded-full"
+                style={{
+                  transform: `scaleX(${isVisible ? 1 : 0})`,
+                  transformOrigin: "center",
+                  transition: "transform 0.8s ease-out",
+                }}
+              ></div>
             </div>
 
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <div className="relative">
-                <div className="bg-gradient-to-br from-purple-950/60 to-pink-950/60 backdrop-blur-xl p-8 rounded-3xl border border-white/5 shadow-2xl">
+                <div
+                  className="bg-gradient-to-br from-purple-950/60 to-pink-950/60 backdrop-blur-xl p-8 rounded-3xl border border-white/5 shadow-2xl hover:shadow-purple-500/20 transition-all duration-500"
+                  style={{
+                    transform: isVisible
+                      ? "translateX(0)"
+                      : "translateX(-50px)",
+                    opacity: isVisible ? 1 : 0,
+                    transition:
+                      "transform 0.6s ease-out, opacity 0.6s ease-out, box-shadow 0.3s ease-out",
+                  }}
+                >
                   <div className="absolute -top-6 -left-6 w-12 h-12 bg-gradient-to-r from-purple-700 to-pink-700 rounded-full flex items-center justify-center text-2xl">
                     💻
                   </div>
@@ -208,7 +294,15 @@ const AboutMe = () => {
               </div>
 
               <div className="relative">
-                <div className="bg-gradient-to-br from-blue-950/60 to-purple-950/60 backdrop-blur-xl p-8 rounded-3xl border border-white/5 shadow-2xl">
+                <div
+                  className="bg-gradient-to-br from-blue-950/60 to-purple-950/60 backdrop-blur-xl p-8 rounded-3xl border border-white/5 shadow-2xl hover:shadow-blue-500/20 transition-all duration-500"
+                  style={{
+                    transform: isVisible ? "translateX(0)" : "translateX(50px)",
+                    opacity: isVisible ? 1 : 0,
+                    transition:
+                      "transform 0.6s ease-out 0.2s, opacity 0.6s ease-out 0.2s, box-shadow 0.3s ease-out",
+                  }}
+                >
                   <div className="absolute -top-6 -left-6 w-12 h-12 bg-gradient-to-r from-blue-700 to-purple-700 rounded-full flex items-center justify-center text-2xl">
                     🚀
                   </div>
@@ -223,8 +317,16 @@ const AboutMe = () => {
               </div>
             </div>
 
-            <div className="mt-16 text-center">
-              <div className="bg-black/50 backdrop-blur-xl p-8 rounded-3xl border border-white/5 max-w-4xl mx-auto">
+            <div
+              className="mt-16 text-center"
+              style={{
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible ? "translateY(0)" : "translateY(30px)",
+                transition:
+                  "opacity 0.6s ease-out 0.4s, transform 0.6s ease-out 0.4s",
+              }}
+            >
+              <div className="bg-black/50 backdrop-blur-xl p-8 rounded-3xl border border-white/5 max-w-4xl mx-auto hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-500">
                 <p className="text-xl text-gray-300 leading-relaxed">
                   I am a dedicated software developer with a strong vision to
                   deliver impactful and user-centric digital solutions. I
@@ -244,44 +346,76 @@ const AboutMe = () => {
 
         {/* Skills Section */}
         {activeSection === "skills" && (
-          <div>
+          <div
+            style={{
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible ? "translateY(0)" : "translateY(30px)",
+              transition: "opacity 0.6s ease-out, transform 0.6s ease-out",
+            }}
+          >
             <h2 className="text-5xl font-bold text-center bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent mb-16 mt-8">
               Technical Skills
             </h2>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-              {Object.entries(skillCategories).map(([category, skills]) => (
-                <div key={category}>
-                  <div className="bg-gradient-to-br from-purple-950/60 to-pink-950/60 backdrop-blur-xl p-6 rounded-2xl border border-white/5 hover:scale-105 transition-transform duration-300">
-                    <h3 className="text-xl font-semibold mb-4 text-purple-300 text-center">
-                      {category}
-                    </h3>
-                    <div className="flex flex-wrap justify-center gap-3">
-                      {skills.map((skill) => (
-                        <span
-                          key={skill}
-                          className="px-4 py-2 bg-slate-800/50 text-purple-300 text-sm font-semibold rounded-xl border border-slate-600 hover:border-purple-500 hover:bg-purple-900/30 transition-all duration-300 transform hover:scale-105"
-                        >
-                          {skill}
-                        </span>
-                      ))}
+              {Object.entries(skillCategories).map(
+                ([category, skills], index) => (
+                  <div
+                    key={category}
+                    style={{
+                      opacity: isVisible ? 1 : 0,
+                      transform: isVisible
+                        ? "translateY(0)"
+                        : "translateY(20px)",
+                      transition: `opacity 0.6s ease-out ${
+                        index * 0.1
+                      }s, transform 0.6s ease-out ${index * 0.1}s`,
+                    }}
+                  >
+                    <div className="bg-gradient-to-br from-purple-950/60 to-pink-950/60 backdrop-blur-xl p-6 rounded-2xl border border-white/5 hover:scale-105 transition-transform duration-300 hover:shadow-lg hover:shadow-purple-500/20">
+                      <h3 className="text-xl font-semibold mb-4 text-purple-300 text-center">
+                        {category}
+                      </h3>
+                      <div className="flex flex-wrap justify-center gap-3">
+                        {skills.map((skill) => (
+                          <span
+                            key={skill}
+                            className="px-4 py-2 bg-slate-800/50 text-purple-300 text-sm font-semibold rounded-xl border border-slate-600 hover:border-purple-500 hover:bg-purple-900/30 transition-all duration-300 transform hover:scale-105"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                )
+              )}
             </div>
           </div>
         )}
 
         {/* Education Section */}
         {activeSection === "education" && (
-          <div className="transform transition-all duration-700 translate-y-0 opacity-100">
+          <div
+            className="transform transition-all duration-700"
+            style={{
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible ? "translateY(0)" : "translateY(30px)",
+              transition: "opacity 0.6s ease-out, transform 0.6s ease-out",
+            }}
+          >
             <h2 className="text-5xl font-bold text-center bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent mb-16 mt-8">
               Education Journey
             </h2>
             <div className="relative max-w-4xl mx-auto">
               {/* Timeline container */}
-              <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-purple-600 to-pink-600 transform -translate-x-1/2"></div>
+              <div
+                className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-purple-600 to-pink-600 transform -translate-x-1/2"
+                style={{
+                  height: isVisible ? "100%" : "0",
+                  transition: "height 1s ease-out",
+                }}
+              ></div>
 
               {educationData.map((item, index) => (
                 <div
@@ -289,6 +423,17 @@ const AboutMe = () => {
                   className={`flex items-start mb-12 ${
                     index % 2 === 0 ? "flex-row" : "flex-row-reverse"
                   }`}
+                  style={{
+                    opacity: isVisible ? 1 : 0,
+                    transform: isVisible
+                      ? "translateX(0)"
+                      : index % 2 === 0
+                      ? "translateX(-50px)"
+                      : "translateX(50px)",
+                    transition: `opacity 0.6s ease-out ${
+                      index * 0.2
+                    }s, transform 0.6s ease-out ${index * 0.2}s`,
+                  }}
                 >
                   {/* Education card */}
                   <div
@@ -296,7 +441,7 @@ const AboutMe = () => {
                       index % 2 === 0 ? "pr-8 text-right" : "pl-8 text-left"
                     }`}
                   >
-                    <div className="bg-gradient-to-br from-purple-950/60 to-pink-950/60 backdrop-blur-xl p-6 rounded-2xl border border-white/5 hover:scale-105 transition-transform duration-300">
+                    <div className="bg-gradient-to-br from-purple-950/60 to-pink-950/60 backdrop-blur-xl p-6 rounded-2xl border border-white/5 hover:scale-105 transition-transform duration-300 hover:shadow-lg hover:shadow-purple-500/20">
                       <div className="flex items-center gap-3 mb-3">
                         <span className="text-3xl">{item.icon}</span>
                         <span className="text-purple-300 font-mono text-sm bg-purple-950/60 px-3 py-1 rounded-full">
@@ -312,7 +457,15 @@ const AboutMe = () => {
 
                   {/* Timeline dot */}
                   <div className="relative flex-shrink-0 w-0">
-                    <div className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full border-4 border-slate-950"></div>
+                    <div
+                      className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full border-4 border-slate-950"
+                      style={{
+                        transform: isVisible
+                          ? "translateX(-50%) scale(1)"
+                          : "translateX(-50%) scale(0)",
+                        transition: `transform 0.4s ease-out ${index * 0.3}s`,
+                      }}
+                    ></div>
                   </div>
 
                   {/* Empty space to balance the layout */}
@@ -325,7 +478,13 @@ const AboutMe = () => {
 
         {/* Certifications Section */}
         {activeSection === "certifications" && (
-          <div className="transform transition-all duration-700 translate-y-0 opacity-100">
+          <div
+            style={{
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible ? "translateY(0)" : "translateY(30px)",
+              transition: "opacity 0.6s ease-out, transform 0.6s ease-out",
+            }}
+          >
             <h2 className="text-5xl font-bold text-center bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent mb-16 mt-8">
               Certifications
             </h2>
@@ -333,7 +492,14 @@ const AboutMe = () => {
               {certifications.map((cert, index) => (
                 <div
                   key={index}
-                  className="bg-gradient-to-br from-purple-950/60 to-pink-950/60 backdrop-blur-xl p-6 rounded-2xl border border-white/5 hover:scale-105 transition-transform duration-300"
+                  className="bg-gradient-to-br from-purple-950/60 to-pink-950/60 backdrop-blur-xl p-6 rounded-2xl border border-white/5 hover:scale-105 transition-transform duration-300 hover:shadow-lg hover:shadow-purple-500/20"
+                  style={{
+                    opacity: isVisible ? 1 : 0,
+                    transform: isVisible ? "translateY(0)" : "translateY(20px)",
+                    transition: `opacity 0.6s ease-out ${
+                      index * 0.1
+                    }s, transform 0.6s ease-out ${index * 0.1}s`,
+                  }}
                 >
                   <h3 className="text-lg font-semibold text-purple-300 mb-2">
                     {cert.name}
@@ -345,7 +511,7 @@ const AboutMe = () => {
                       href={cert.pdf}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-block px-4 py-2 bg-purple-600 text-white rounded-full text-sm hover:bg-purple-700 transition"
+                      className="inline-block px-4 py-2 bg-purple-600 text-white rounded-full text-sm hover:bg-purple-700 transition hover:shadow-md hover:shadow-purple-500/30"
                     >
                       View Certificate
                     </a>

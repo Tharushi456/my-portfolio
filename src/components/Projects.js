@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 const projects = [
   {
@@ -201,6 +201,8 @@ function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
+  const sectionRef = useRef(null);
   const visibleProjects = showAll ? projects : projects.slice(0, 4);
 
   useEffect(() => {
@@ -210,7 +212,30 @@ function Projects() {
       setIsVisible(true);
     }, 1800);
 
-    return () => clearTimeout(loadingTimer);
+    const handleScroll = () => {
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        const scrollPosition = window.scrollY;
+        setScrollY(scrollPosition);
+
+        // Calculate visibility based on scroll position
+        const windowHeight = window.innerHeight;
+        const elementVisible = 150;
+        const elementPosition = rect.top;
+
+        if (elementPosition < windowHeight - elementVisible) {
+          setIsVisible(true);
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Initial check
+
+    return () => {
+      clearTimeout(loadingTimer);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const handleViewProject = (project) => {
@@ -292,9 +317,12 @@ function Projects() {
   return (
     <section
       id="projects"
-      className={`py-32 px-6 relative overflow-hidden min-h-screen transform transition-all duration-1000 ${
-        isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-      }`}
+      ref={sectionRef}
+      className={`py-32 px-6 relative overflow-hidden min-h-screen`}
+      style={{
+        transform: `translateY(${Math.min(scrollY * 0.1, 50)}px)`,
+        transition: "transform 0.5s ease-out",
+      }}
     >
       {/* Background Orbs */}
       <div className="absolute top-20 left-20 w-60 h-60 bg-purple-700 rounded-full mix-blend-multiply filter blur-2xl opacity-12 animate-pulse" />
@@ -309,12 +337,34 @@ function Projects() {
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
-        <div className="text-center mb-20">
+        <div
+          className="text-center mb-20"
+          style={{
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? "translateY(0)" : "translateY(30px)",
+            transition: "opacity 0.8s ease-out, transform 0.8s ease-out",
+          }}
+        >
           <h2 className="text-6xl md:text-8xl font-black bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent mb-6 leading-tight animate-pulse">
             Featured Projects
           </h2>
-          <div className="h-1 w-32 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full mx-auto animate-pulse" />
-          <p className="text-gray-300 text-xl mt-8 max-w-2xl mx-auto leading-relaxed">
+          <div
+            className="h-1 w-32 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full mx-auto animate-pulse"
+            style={{
+              transform: isVisible ? "scaleX(1)" : "scaleX(0)",
+              transformOrigin: "center",
+              transition: "transform 0.8s ease-out 0.3s",
+            }}
+          />
+          <p
+            className="text-gray-300 text-xl mt-8 max-w-2xl mx-auto leading-relaxed"
+            style={{
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible ? "translateY(0)" : "translateY(20px)",
+              transition:
+                "opacity 0.6s ease-out 0.5s, transform 0.6s ease-out 0.5s",
+            }}
+          >
             Showcasing innovative solutions built with modern technologies
           </p>
         </div>
@@ -322,7 +372,17 @@ function Projects() {
         {/* Projects Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {visibleProjects.map((project, idx) => (
-            <div key={idx} className="group relative">
+            <div
+              key={idx}
+              className="group relative"
+              style={{
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible ? "translateY(0)" : "translateY(30px)",
+                transition: `opacity 0.6s ease-out ${
+                  idx * 0.1
+                }s, transform 0.6s ease-out ${idx * 0.1}s`,
+              }}
+            >
               <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl blur opacity-25 group-hover:opacity-75 transition duration-1000" />
 
               <div className="relative bg-slate-900/90 backdrop-blur-xl rounded-3xl p-8 border border-slate-700/50 hover:border-purple-500/50 transition-all duration-500 group-hover:scale-[1.02] shadow-2xl h-full flex flex-col">
@@ -390,7 +450,15 @@ function Projects() {
         </div>
 
         {/* Toggle Button */}
-        <div className="text-center mt-20">
+        <div
+          className="text-center mt-20"
+          style={{
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? "translateY(0)" : "translateY(30px)",
+            transition:
+              "opacity 0.6s ease-out 0.3s, transform 0.6s ease-out 0.3s",
+          }}
+        >
           <div className="relative group inline-block">
             <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000" />
             <button
