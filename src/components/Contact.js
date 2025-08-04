@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -11,6 +11,8 @@ function Contact() {
   const [submitStatus, setSubmitStatus] = useState("");
   const [isVisible, setIsVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [scrollY, setScrollY] = useState(0);
+  const sectionRef = useRef(null);
 
   useEffect(() => {
     // Simulate loading time
@@ -19,8 +21,29 @@ function Contact() {
       setIsVisible(true);
     }, 1500);
 
+    const handleScroll = () => {
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        const scrollPosition = window.scrollY;
+        setScrollY(scrollPosition);
+
+        // Calculate visibility based on scroll position
+        const windowHeight = window.innerHeight;
+        const elementVisible = 150;
+        const elementPosition = rect.top;
+
+        if (elementPosition < windowHeight - elementVisible) {
+          setIsVisible(true);
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Initial check
+
     return () => {
       clearTimeout(loadingTimer);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -120,35 +143,78 @@ function Contact() {
   return (
     <section
       id="contact"
+      ref={sectionRef}
       className="py-32 px-6 relative overflow-hidden min-h-screen flex items-center"
+      style={{
+        transform: `translateY(${Math.min(scrollY * 0.1, 50)}px)`,
+        transition: "transform 0.5s ease-out",
+      }}
     >
       {/* Animated Background Elements */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" />
+      <div
+        className="absolute top-20 left-10 w-72 h-72 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"
+        style={{
+          transform: `translate(${scrollY * 0.02}px, ${scrollY * 0.02}px)`,
+          transition: "transform 0.3s ease-out",
+        }}
+      />
       <div
         className="absolute bottom-10 right-10 w-96 h-96 bg-pink-600 rounded-full mix-blend-multiply filter blur-3xl opacity-15 animate-pulse"
-        style={{ animationDelay: "1s" }}
+        style={{
+          animationDelay: "1s",
+          transform: `translate(${-scrollY * 0.03}px, ${-scrollY * 0.03}px)`,
+          transition: "transform 0.4s ease-out",
+        }}
       />
       <div
         className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-pulse"
-        style={{ animationDelay: "2s" }}
+        style={{
+          animationDelay: "2s",
+          transform: `translate(${scrollY * 0.01}px, ${scrollY * 0.01}px)`,
+          transition: "transform 0.5s ease-out",
+        }}
       />
 
-      <div
-        className={`max-w-6xl mx-auto relative z-10 w-full transform transition-all duration-700 ${
-          isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-        }`}
-      >
+      <div className="max-w-6xl mx-auto relative z-10 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left Side - Contact Info */}
-          <div className="space-y-12">
+          <div
+            className="space-y-12"
+            style={{
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible ? "translateX(0)" : "translateX(-50px)",
+              transition: "opacity 0.8s ease-out, transform 0.8s ease-out",
+            }}
+          >
             <div>
-              <h2 className="text-6xl md:text-7xl font-black bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent mb-6 leading-tight">
+              <h2
+                className="text-6xl md:text-7xl font-black bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent mb-6 leading-tight"
+                style={{
+                  transform: isVisible ? "translateY(0)" : "translateY(20px)",
+                  transition: "transform 0.6s ease-out 0.2s",
+                }}
+              >
                 Let's Create
                 <br />
                 <span className="text-white">Together</span>
               </h2>
-              <div className="h-1 w-40 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full animate-pulse mb-8" />
-              <p className="text-xl text-gray-300 leading-relaxed max-w-lg">
+              <div
+                className="h-1 w-40 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mb-8"
+                style={{
+                  transform: isVisible ? "scaleX(1)" : "scaleX(0)",
+                  transformOrigin: "left",
+                  transition: "transform 0.8s ease-out 0.4s",
+                }}
+              />
+              <p
+                className="text-xl text-gray-300 leading-relaxed max-w-lg"
+                style={{
+                  opacity: isVisible ? 1 : 0,
+                  transform: isVisible ? "translateY(0)" : "translateY(20px)",
+                  transition:
+                    "opacity 0.6s ease-out 0.6s, transform 0.6s ease-out 0.6s",
+                }}
+              >
                 Ready to bring your ideas to life? I'm passionate about creating
                 innovative solutions and would love to discuss internship
                 opportunities or exciting collaborations.
@@ -157,7 +223,15 @@ function Contact() {
 
             <div className="space-y-6">
               {/* Email */}
-              <div className="flex items-center gap-4 group cursor-pointer">
+              <div
+                className="flex items-center gap-4 group cursor-pointer"
+                style={{
+                  opacity: isVisible ? 1 : 0,
+                  transform: isVisible ? "translateX(0)" : "translateX(-20px)",
+                  transition:
+                    "opacity 0.6s ease-out 0.7s, transform 0.6s ease-out 0.7s",
+                }}
+              >
                 <div className="w-14 h-14 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   <span className="text-2xl">📧</span>
                 </div>
@@ -173,6 +247,12 @@ function Contact() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block"
+                style={{
+                  opacity: isVisible ? 1 : 0,
+                  transform: isVisible ? "translateX(0)" : "translateX(-20px)",
+                  transition:
+                    "opacity 0.6s ease-out 0.8s, transform 0.6s ease-out 0.8s",
+                }}
               >
                 <div className="flex items-center gap-4 group cursor-pointer">
                   <div className="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
@@ -191,6 +271,12 @@ function Contact() {
               <div
                 onClick={handleCVDownload}
                 className="flex items-center gap-4 group cursor-pointer"
+                style={{
+                  opacity: isVisible ? 1 : 0,
+                  transform: isVisible ? "translateX(0)" : "translateX(-20px)",
+                  transition:
+                    "opacity 0.6s ease-out 0.9s, transform 0.6s ease-out 0.9s",
+                }}
               >
                 <div className="w-14 h-14 bg-gradient-to-r from-green-600 to-blue-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   <span className="text-2xl">📄</span>
@@ -209,11 +295,19 @@ function Contact() {
           </div>
 
           {/* Right Side - Contact Form */}
-          <div className="relative">
+          <div
+            className="relative"
+            style={{
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible ? "translateX(0)" : "translateX(50px)",
+              transition:
+                "opacity 0.8s ease-out 0.2s, transform 0.8s ease-out 0.2s",
+            }}
+          >
             {/* Form Background Glow */}
             <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl blur opacity-25 animate-pulse" />
 
-            <div className="relative bg-slate-900/90 backdrop-blur-xl rounded-3xl p-8 border border-slate-700/50 shadow-2xl">
+            <div className="relative bg-slate-900/90 backdrop-blur-xl rounded-3xl p-8 border border-slate-700/50 shadow-2xl hover:shadow-purple-500/20 transition-all duration-500">
               <div className="space-y-6">
                 <div className="text-center mb-8">
                   <h3 className="text-2xl font-bold text-white mb-2">
